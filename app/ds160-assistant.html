@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DS-160</title>
+    <link rel="stylesheet" href="/app/ds160-assistant.css" />
+  </head>
+  <body>
+    <div class="noise"></div>
+    <main class="shell">
+      <aside class="rail">
+        <div class="brand">
+          <div class="eyebrow">DS-160</div>
+          <h1>填写页</h1>
+        </div>
+        <section class="import-card">
+          <label class="upload-field">
+            <span class="eyebrow">JSON</span>
+            <input id="intake-file" type="file" accept="application/json,.json" />
+          </label>
+          <label class="upload-field encrypted-passphrase-field" id="encrypt-passphrase-field" style="display:none">
+            <span class="eyebrow">密码</span>
+            <input id="intake-passphrase" type="password" placeholder="输入加密文件的密码" autocomplete="new-password" />
+          </label>
+          <button id="load-intake" class="primary wide">导入 JSON</button>
+          <div id="intake-doc-status" class="import-status">未导入</div>
+        </section>
+        <div id="summary" class="summary"></div>
+        <div id="page-nav" class="page-nav flow-nav"></div>
+      </aside>
+
+      <section class="stage">
+        <header class="stage-head">
+          <div>
+            <div class="eyebrow">PAGE</div>
+            <h2 id="page-title">--</h2>
+          </div>
+          <div class="stage-actions" aria-label="填表操作">
+            <button id="fill-page" class="primary">一键填入</button>
+            <button id="fill-continue" class="primary">填完并翻页</button>
+            <button id="fill-all" class="primary outline">一键填完全部</button>
+          </div>
+        </header>
+
+        <div id="progress-bar-container" class="progress-container" style="display:none">
+          <div class="progress-track">
+            <div id="progress-bar" class="progress-bar"></div>
+          </div>
+          <div class="progress-info">
+            <span id="progress-text">0 / 0</span>
+            <button id="cancel-fill-all" class="ghost small">取消</button>
+          </div>
+        </div>
+
+        <section class="status-strip compact">
+          <div class="metric">
+            <span>可自动填入</span>
+            <strong id="metric-fill">0</strong>
+          </div>
+          <div class="metric">
+            <span>待确认</span>
+            <strong id="metric-review">0</strong>
+          </div>
+          <div class="metric">
+            <span>缺失</span>
+            <strong id="metric-blocked">0</strong>
+          </div>
+          <div class="metric" id="server-status-metric">
+            <span>本地服务</span>
+            <strong id="server-status">检测中…</strong>
+          </div>
+          <div class="metric">
+            <span>Application ID</span>
+            <strong id="application-id">--</strong>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-head">
+            <h3>结果</h3>
+          </div>
+          <div id="fill-result" class="terminal-output"></div>
+        </section>
+      </section>
+    </main>
+
+    <script src="/app/ds160-assistant.js"></script>
+  </body>
+</html>

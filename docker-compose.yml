@@ -1,0 +1,32 @@
+services:
+  ds160:
+    build: .
+    image: ds160-visa-assistant:latest
+    container_name: ds160-visa
+    ports:
+      - "8765:8765"   # API server + web UI
+      - "9222:9222"   # Chrome DevTools Protocol
+    environment:
+      - CDP_PORT=9222
+      - DOSSIER_PATH=/app/sample_data/china_b1b2_sample.json
+      - HEADLESS=${HEADLESS:-new}
+    volumes:
+      - chrome_data:/home/ds160/chrome-profile
+      - ./sample_data:/app/sample_data:ro
+    restart: unless-stopped
+    shm_size: "256m"
+
+  # Optional: enable with `docker compose --profile vnc up`
+  novnc:
+    image: theasp/novnc:latest
+    profiles: ["vnc"]
+    ports:
+      - "6080:8080"
+    environment:
+      - DISPLAY=:99
+      - NOVNC_PORT=8080
+    depends_on:
+      - ds160
+
+volumes:
+  chrome_data:

@@ -1,0 +1,171 @@
+{
+  "case_id": "CN-B1B2-FAKE-TEST-001",
+  "identity": {
+    "surname": "LI",
+    "given_names": "MING",
+    "native_full_name": "李明",
+    "sex": "MALE",
+    "marital_status": "SINGLE",
+    "date_of_birth": "1992-03-14",
+    "birth_city": "BEIJING",
+    "birth_province": "BEIJING",
+    "birth_country": "CHINA",
+    "nationality": "CHINA",
+    "passport_number": "E98765432",
+    "passport_issuance_country": "CHINA",
+    "passport_issue_date": "2024-01-08",
+    "passport_expiration_date": "2034-01-07",
+    "passport_book_number": null,
+    "source_ids": [
+      "passport_scan_test"
+    ],
+    "other_nationality": false,
+    "permanent_resident_other_country": false,
+    "national_id_number": null,
+    "us_social_security_number": null,
+    "us_taxpayer_id_number": null
+  },
+  "travel_plan": {
+    "visa_class": "B1/B2",
+    "purpose_notes": "Attend a short industry meetup in Seattle and spend a few days on personal travel.",
+    "intended_arrival_date": "2026-10-06",
+    "intended_length_of_stay_value": "10",
+    "intended_length_of_stay_unit": "DAYS",
+    "payer_name": "Beijing Demo Technology Co., Ltd.",
+    "us_contact_name": "Olivia Chen",
+    "us_contact_organization": "Northwest Business Forum",
+    "us_contact_address_line1": "800 Pine Street",
+    "us_contact_city": "Seattle",
+    "us_contact_state": "Washington",
+    "us_contact_postal_code": "98101",
+    "us_contact_phone": "+1 206 555 0198",
+    "us_contact_email": "olivia.chen@exampleforum.test",
+    "source_ids": [
+      "itinerary_email_test",
+      "event_invitation_test"
+    ]
+  },
+  "employment_education": {
+    "primary_occupation": "BUSINESSPERSON",
+    "current_employer_name": "Beijing Demo Technology Co., Ltd.",
+    "current_employer_address": "88 Demo Plaza, Chaoyang District, Beijing, China",
+    "monthly_income_local": "28000",
+    "school_name": null,
+    "source_ids": [
+      "employment_letter_test"
+    ]
+  },
+  "family_contacts": {
+    "father_full_name": "LI GUOQIANG",
+    "mother_full_name": "ZHANG YAN",
+    "spouse_full_name": null,
+    "us_relative_name": null,
+    "us_relative_status": null,
+    "source_ids": [
+      "family_intake_form_test"
+    ]
+  },
+  "security_background": {
+    "yes_no_answers": {
+      "communicable_disease": false,
+      "physical_or_mental_disorder": false,
+      "drug_abuser": false,
+      "arrested_or_convicted": false,
+      "controlled_substances": false,
+      "prostitution_or_vice": false,
+      "money_laundering": false,
+      "human_trafficking": false,
+      "assisted_severe_trafficking": false,
+      "human_trafficking_related": false,
+      "illegal_activity": false,
+      "terrorist_activity": false,
+      "terrorist_support": false,
+      "terrorist_org": false,
+      "terrorist_rel": false,
+      "genocide": false,
+      "torture": false,
+      "extrajudicial_violence": false,
+      "child_soldier": false,
+      "religious_freedom": false,
+      "population_controls": false,
+      "transplant": false,
+      "removal_hearing": false,
+      "immigration_fraud": false,
+      "fail_to_attend": false,
+      "visa_violation": false,
+      "deport": false,
+      "child_custody": false,
+      "voting_violation": false,
+      "renounce_exp": false,
+      "attend_public_school_without_reimbursing": false
+    },
+    "explanations": {},
+    "source_ids": [
+      "security_review_form_test"
+    ]
+  },
+  "evidence_catalog": [
+    {
+      "id": "passport_scan_test",
+      "kind": "passport",
+      "description": "Test passport bio page scan."
+    },
+    {
+      "id": "itinerary_email_test",
+      "kind": "itinerary",
+      "description": "Test itinerary email showing flights and hotel dates."
+    },
+    {
+      "id": "event_invitation_test",
+      "kind": "invitation",
+      "description": "Industry forum invitation letter for Seattle event."
+    },
+    {
+      "id": "employment_letter_test",
+      "kind": "employment",
+      "description": "Employer certificate used for local chain testing."
+    },
+    {
+      "id": "family_intake_form_test",
+      "kind": "intake_form",
+      "description": "Manual confirmation form for parental details."
+    },
+    {
+      "id": "security_review_form_test",
+      "kind": "review_form",
+      "description": "Signed security background questionnaire with no findings."
+    }
+  ],
+  "personal_contact": {
+    "home_address_line1": "Room 501, Building 3, 88 Huaihai Rd",
+    "home_address_line2": null,
+    "home_city": "Shanghai",
+    "home_state": "Shanghai",
+    "home_postal_code": "200000",
+    "home_country": "CHINA",
+    "primary_phone": "+86 138 0000 1234",
+    "secondary_phone": null,
+    "work_phone": "+86 21 1234 5678",
+    "email": "zhangwei@example.com",
+    "social_media_platform": "WeChat",
+    "social_media_handle": "@zhangwei",
+    "mailing_same_as_home": true,
+    "source_ids": []
+  },
+  "previous_travel": {
+    "has_previous_us_travel": false,
+    "last_arrival_date": null,
+    "last_length_of_stay_value": null,
+    "last_length_of_stay_unit": null,
+    "has_previous_us_visa": false,
+    "previous_visa_number": null,
+    "previous_visa_issue_date": null,
+    "visa_ever_refused": false,
+    "visa_ever_lost": false,
+    "visa_ever_cancelled": false,
+    "has_immigrant_petition": false,
+    "has_us_driver_license": false,
+    "ten_print_collected": false,
+    "source_ids": []
+  }
+}

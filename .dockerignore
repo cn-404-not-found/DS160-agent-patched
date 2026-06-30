@@ -1,0 +1,15 @@
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.git
+.codex
+.claude
+.local-browser-profile
+.visible-browser-profile
+.playwright-cli
+deliverables
+docs
+node_modules
+*.tmp
+sample_data/*.enc.json

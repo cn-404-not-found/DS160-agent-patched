@@ -1,0 +1,347 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DS-160 Intake</title>
+    <link rel="stylesheet" href="/app/intake.css" />
+  </head>
+  <body>
+    <div class="backdrop"></div>
+    <main class="shell">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">China B1/B2 Intake</p>
+          <h1>填写申请资料，生成统一 dossier 文件。</h1>
+          <p class="lede">
+            这一步只负责整理申请资料。填写完毕后，会生成一份统一申请资料文件，再交给执行页导入。
+          </p>
+          <div class="hero-strip">
+            <div><span>采集方式</span><strong>手动填写</strong></div>
+            <div><span>边界</span><strong>只负责采集</strong></div>
+            <div><span>输出</span><strong>统一申请资料</strong></div>
+          </div>
+        </div>
+        <aside class="hero-aside">
+          <div class="aside-card">
+            <span class="aside-kicker">How To Use</span>
+            <ol>
+              <li>填写下方各部分信息。</li>
+              <li>确认无误后点击生成。</li>
+              <li>生成资料后，再去执行页导入同一份文件。</li>
+            </ol>
+          </div>
+        </aside>
+      </section>
+
+      <section class="workspace">
+        <section class="intake-form">
+          <form id="manual-form" class="form-group">
+            <div class="group-head">
+              <p class="eyebrow">Manual Entry</p>
+              <h2>填写 full dossier</h2>
+            </div>
+            <div class="progress-track"><div id="form-progress-bar" class="progress-fill" style="width:0%"></div></div>
+            <div id="form-progress-text" class="progress-text">已填写: 0%</div>
+
+            <!-- ============================================================
+                 SECTION 1: CASE & IDENTITY
+                 ============================================================ -->
+            <h3 class="section-label">基本信息和护照</h3>
+            <div class="grid two">
+              <label><span>Case ID</span><input name="case_id" required placeholder="CN-B1B2-2026-001" /><small class="field-hint" data-hint-for="case_id"></small></label>
+              <label><span>签证类别</span><input name="travel_plan.visa_class" required placeholder="B1/B2" value="B1/B2" /><small class="field-hint" data-hint-for="travel_plan.visa_class"></small></label>
+              <label class="full"><span>护照英文姓</span><input name="identity.surname" required placeholder="ZHANG" /><small class="field-hint" data-hint-for="identity.surname"></small></label>
+              <label class="full"><span>护照英文名</span><input name="identity.given_names" required placeholder="WEI" /><small class="field-hint" data-hint-for="identity.given_names"></small></label>
+              <label class="full"><span>中文姓名</span><input name="identity.native_full_name" placeholder="张伟" /><small class="field-hint" data-hint-for="identity.native_full_name"></small></label>
+              <label><span>性别</span><select name="identity.sex" required><option value="MALE">男</option><option value="FEMALE">女</option></select><small class="field-hint" data-hint-for="identity.sex"></small></label>
+              <label><span>婚姻状态</span><select name="identity.marital_status" required><option value="SINGLE">未婚</option><option value="MARRIED">已婚</option><option value="DIVORCED">离婚</option><option value="WIDOWED">丧偶</option></select><small class="field-hint" data-hint-for="identity.marital_status"></small></label>
+              <label><span>出生日期</span><input type="date" name="identity.date_of_birth" required /><small class="field-hint" data-hint-for="identity.date_of_birth"></small></label>
+              <label><span>出生城市</span><input name="identity.birth_city" required placeholder="Shanghai" /><small class="field-hint" data-hint-for="identity.birth_city"></small></label>
+              <label><span>出生省份</span><input name="identity.birth_province" placeholder="Shanghai" /><small class="field-hint" data-hint-for="identity.birth_province"></small></label>
+              <label><span>出生国家</span><input name="identity.birth_country" required placeholder="CHINA" value="CHINA" /><small class="field-hint" data-hint-for="identity.birth_country"></small></label>
+              <label><span>国籍</span><input name="identity.nationality" required placeholder="CHINA" value="CHINA" /><small class="field-hint" data-hint-for="identity.nationality"></small></label>
+              <label><span>护照号码</span><input name="identity.passport_number" required placeholder="E12345678" /><small class="field-hint" data-hint-for="identity.passport_number"></small></label>
+              <label><span>护照签发国家</span><input name="identity.passport_issuance_country" required placeholder="CHINA" value="CHINA" /><small class="field-hint" data-hint-for="identity.passport_issuance_country"></small></label>
+              <label><span>护照签发日期</span><input type="date" name="identity.passport_issue_date" required /><small class="field-hint" data-hint-for="identity.passport_issue_date"></small></label>
+              <label><span>护照失效日期</span><input type="date" name="identity.passport_expiration_date" required /><small class="field-hint" data-hint-for="identity.passport_expiration_date"></small></label>
+              <label><span>护照本编号</span><input name="identity.passport_book_number" placeholder="无可留空" /><small class="field-hint" data-hint-for="identity.passport_book_number"></small></label>
+              <label class="toggle"><span>有其他国家国籍</span><input type="checkbox" name="identity.other_nationality" /></label>
+              <label class="toggle"><span>有其他国永久居留权</span><input type="checkbox" name="identity.permanent_resident_other_country" /></label>
+              <label><span>身份证号码</span><input name="identity.national_id_number" placeholder="选填" /></label>
+              <label><span>美国社保号 (SSN)</span><input name="identity.us_social_security_number" placeholder="无可留空" /></label>
+              <label><span>美国纳税号 (ITIN)</span><input name="identity.us_taxpayer_id_number" placeholder="无可留空" /></label>
+              <label class="full"><span>Identity Source IDs</span><input name="identity.source_ids" required placeholder="passport_scan, passport_translation" /><small class="field-hint" data-hint-for="identity.source_ids"></small></label>
+            </div>
+
+            <!-- ============================================================
+                 SECTION 2: TRAVEL PLAN
+                 ============================================================ -->
+            <h3 class="section-label">旅行计划</h3>
+            <div class="grid two">
+              <label class="full"><span>赴美目的说明</span><textarea name="travel_plan.purpose_notes" rows="3" placeholder="Attend supplier meetings in California and combine with short tourism."></textarea><small class="field-hint" data-hint-for="travel_plan.purpose_notes"></small></label>
+              <label><span>预计到达日期</span><input type="date" name="travel_plan.intended_arrival_date" /><small class="field-hint" data-hint-for="travel_plan.intended_arrival_date"></small></label>
+              <label><span>停留时长</span><div class="inline-pair"><input name="travel_plan.intended_length_of_stay_value" placeholder="12" /><select name="travel_plan.intended_length_of_stay_unit"><option value="">请选择</option><option value="DAYS">天</option><option value="WEEKS">周</option><option value="MONTHS">月</option></select></div><small class="field-hint" data-hint-for="travel_plan.intended_length_of_stay_value"></small></label>
+              <label><span>费用承担方</span><input name="travel_plan.payer_name" placeholder="Shanghai Example Trading Co., Ltd." /></label>
+              <label><span>美国联系人姓名</span><input name="travel_plan.us_contact_name" placeholder="Michael Chen" /></label>
+              <label><span>机构名称</span><input name="travel_plan.us_contact_organization" placeholder="Example US Imports" /></label>
+              <label><span>联系电话</span><input name="travel_plan.us_contact_phone" placeholder="+1 415 555 0187" /></label>
+              <label class="full"><span>联系人地址</span><input name="travel_plan.us_contact_address_line1" placeholder="500 Market Street" /></label>
+              <label><span>城市</span><input name="travel_plan.us_contact_city" placeholder="San Francisco" /></label>
+              <label><span>州</span><input name="travel_plan.us_contact_state" placeholder="California" /></label>
+              <label><span>邮编</span><input name="travel_plan.us_contact_postal_code" placeholder="94105" /></label>
+              <label><span>邮箱</span><input type="email" name="travel_plan.us_contact_email" placeholder="mchen@example.com" /></label>
+              <label class="full"><span>Travel Source IDs</span><input name="travel_plan.source_ids" required placeholder="itinerary_email, invitation_letter" /></label>
+            </div>
+
+            <!-- ============================================================
+                 SECTION 3: EMPLOYMENT / EDUCATION (FULL)
+                 ============================================================ -->
+            <h3 class="section-label">当前工作</h3>
+            <div class="grid two">
+              <label><span>当前职业</span><select name="employment_education.primary_occupation"><option value="">请选择</option><option value="BUSINESSPERSON">企业人员</option><option value="STUDENT">学生</option><option value="OTHER">其他</option></select></label>
+              <label><span>当前单位</span><input name="employment_education.current_employer_name" placeholder="Shanghai Example Trading Co., Ltd." /></label>
+              <label class="full"><span>单位地址 1</span><input name="employment_education.current_employer_address" placeholder="88 Huaihai Middle Road" /></label>
+              <label><span>单位地址 2</span><input name="employment_education.current_employer_address_line2" placeholder="楼层/房间号" /></label>
+              <label><span>单位城市</span><input name="employment_education.employer_city" placeholder="Shanghai" /></label>
+              <label><span>单位省份/州</span><input name="employment_education.employer_state" placeholder="Shanghai" /></label>
+              <label><span>单位邮编</span><input name="employment_education.employer_postal_code" placeholder="200000" /></label>
+              <label><span>单位国家</span><input name="employment_education.employer_country" placeholder="CHINA" value="CHINA" /></label>
+              <label><span>单位电话</span><input name="employment_education.employer_phone" placeholder="+86 21 1234 5678" /></label>
+              <label><span>入职日期</span><input type="date" name="employment_education.current_employment_start_date" /></label>
+              <label class="full"><span>职位</span><input name="employment_education.current_job_title" placeholder="Senior Engineer" /></label>
+              <label class="full"><span>工作职责简述</span><textarea name="employment_education.current_job_duties" rows="2" placeholder="Describe your daily duties briefly."></textarea></label>
+              <label><span>主管姓</span><input name="employment_education.current_supervisor_surname" placeholder="WANG" /></label>
+              <label><span>主管名</span><input name="employment_education.current_supervisor_given_name" placeholder="LEI" /></label>
+              <label><span>月收入</span><input name="employment_education.monthly_income_local" placeholder="32000" /></label>
+            </div>
+
+            <h3 class="section-label">前工作（如适用）</h3>
+            <div class="grid two">
+              <label><span>前单位名称</span><input name="employment_education.previous_employer_name" placeholder="Previous Company Ltd." /></label>
+              <label class="full"><span>前单位地址</span><input name="employment_education.previous_employer_address" placeholder="100 Nanjing Rd" /></label>
+              <label><span>前单位城市</span><input name="employment_education.previous_employer_city" placeholder="Shanghai" /></label>
+              <label><span>前单位省/州</span><input name="employment_education.previous_employer_state" placeholder="Shanghai" /></label>
+              <label><span>前单位邮编</span><input name="employment_education.previous_employer_postal_code" placeholder="200000" /></label>
+              <label><span>前单位国家</span><input name="employment_education.previous_employer_country" placeholder="CHINA" /></label>
+              <label><span>前单位电话</span><input name="employment_education.previous_employer_phone" placeholder="+86 21 1234 5678" /></label>
+              <label><span>前职位</span><input name="employment_education.previous_job_title" placeholder="Engineer" /></label>
+              <label><span>前主管姓</span><input name="employment_education.previous_supervisor_surname" placeholder="LI" /></label>
+              <label><span>前主管名</span><input name="employment_education.previous_supervisor_given_name" placeholder="MING" /></label>
+              <label><span>前工作起始日</span><input type="date" name="employment_education.previous_employment_start_date" /></label>
+              <label><span>前工作结束日</span><input type="date" name="employment_education.previous_employment_end_date" /></label>
+              <label class="full"><span>前工作职责简述</span><textarea name="employment_education.previous_job_duties" rows="2" placeholder="Briefly describe your previous duties."></textarea></label>
+            </div>
+
+            <h3 class="section-label">学历信息</h3>
+            <div class="grid two">
+              <label><span>学校名称</span><input name="employment_education.school_name" placeholder="Fudan University" /></label>
+              <label class="full"><span>学校地址</span><input name="employment_education.school_address_line1" placeholder="220 Handan Rd" /></label>
+              <label><span>学校城市</span><input name="employment_education.school_city" placeholder="Shanghai" /></label>
+              <label><span>学校省/州</span><input name="employment_education.school_state" placeholder="Shanghai" /></label>
+              <label><span>学校邮编</span><input name="employment_education.school_postal_code" placeholder="200433" /></label>
+              <label><span>学校国家</span><input name="employment_education.school_country" placeholder="CHINA" /></label>
+              <label><span>专业</span><input name="employment_education.major_or_course_of_study" placeholder="Computer Science" /></label>
+              <label><span>入学日期</span><input type="date" name="employment_education.school_attendance_start_date" /></label>
+              <label><span>毕业日期</span><input type="date" name="employment_education.school_attendance_end_date" /></label>
+            </div>
+
+            <!-- ============================================================
+                 SECTION 4: ADDITIONAL BACKGROUND
+                 ============================================================ -->
+            <h3 class="section-label">其他背景信息</h3>
+            <div class="grid two">
+              <label><span>掌握语言</span><input name="employment_education.languages" placeholder="CHINESE, ENGLISH" /></label>
+              <label class="full"><span>过去五年内访问过的国家/地区</span><input name="employment_education.countries_visited" placeholder="JAPAN, THAILAND, FRANCE" /></label>
+              <label><span>所属部落/氏族名</span><input name="employment_education.clan_or_tribe_name" placeholder="无可留空" /></label>
+              <label class="full"><span>参加过的组织/社团</span><textarea name="employment_education.organization_memberships" rows="2" placeholder="Professional associations, charities, etc."></textarea></label>
+              <label class="full"><span>特殊技能或培训</span><textarea name="employment_education.specialized_skills_description" rows="2" placeholder="Firearms training, explosives, biological/chemical experience, etc."></textarea></label>
+            </div>
+
+            <h3 class="section-label">兵役记录（如适用）</h3>
+            <div class="grid two">
+              <label><span>服役国家</span><input name="employment_education.military_service_country" placeholder="无可留空" /></label>
+              <label><span>军种</span><input name="employment_education.military_branch" placeholder="Army / Navy / etc." /></label>
+              <label><span>军衔</span><input name="employment_education.military_rank" placeholder="无可留空" /></label>
+              <label><span>军事专业</span><input name="employment_education.military_specialty" placeholder="无可留空" /></label>
+              <label><span>服役起始日</span><input type="date" name="employment_education.military_service_start_date" /></label>
+              <label><span>服役结束日</span><input type="date" name="employment_education.military_service_end_date" /></label>
+              <label class="full"><span>如曾有反叛/游击队/武装组织相关经历，请说明</span><textarea name="employment_education.insurgent_organization_explanation" rows="2" placeholder="无可留空"></textarea></label>
+              <label class="full"><span>Employment Source IDs</span><input name="employment_education.source_ids" required placeholder="employment_letter" /></label>
+            </div>
+
+            <!-- ============================================================
+                 SECTION 5: FAMILY CONTACTS (FULL)
+                 ============================================================ -->
+            <h3 class="section-label">家庭成员</h3>
+            <div class="grid two">
+              <label><span>父亲姓名</span><input name="family_contacts.father_full_name" placeholder="ZHANG JIANGUO" /></label>
+              <label><span>父亲出生日期</span><input type="date" name="family_contacts.father_date_of_birth" /></label>
+              <label class="toggle"><span>父亲在美国</span><input type="checkbox" name="family_contacts.father_in_us" /></label>
+              <label><span>母亲姓名</span><input name="family_contacts.mother_full_name" placeholder="LI HUA" /></label>
+              <label><span>母亲出生日期</span><input type="date" name="family_contacts.mother_date_of_birth" /></label>
+              <label class="toggle"><span>母亲在美国</span><input type="checkbox" name="family_contacts.mother_in_us" /></label>
+              <label><span>配偶姓名</span><input name="family_contacts.spouse_full_name" placeholder="未婚可留空" /></label>
+              <label><span>配偶出生日期</span><input type="date" name="family_contacts.spouse_date_of_birth" /></label>
+              <label><span>配偶国籍</span><input name="family_contacts.spouse_nationality" placeholder="CHINA" /></label>
+              <label><span>配偶出生城市</span><input name="family_contacts.spouse_birth_city" placeholder="可选填" /></label>
+              <label><span>配偶出生国家</span><input name="family_contacts.spouse_birth_country" placeholder="CHINA" /></label>
+              <label class="toggle"><span>有直系亲属在美国</span><input type="checkbox" name="family_contacts.has_us_immediate_relatives" /></label>
+              <label class="toggle"><span>有其他亲属在美国</span><input type="checkbox" name="family_contacts.has_us_other_relatives" /></label>
+              <label><span>美国亲属姓名</span><input name="family_contacts.us_relative_name" placeholder="无可留空" /></label>
+              <label><span>美国亲属关系/身份</span><input name="family_contacts.us_relative_status" placeholder="例如 FRIEND / BROTHER / LPR" /></label>
+              <label class="full"><span>Family Source IDs</span><input name="family_contacts.source_ids" required placeholder="family_intake_form" /></label>
+            </div>
+
+            <!-- ============================================================
+                 SECTION 6: PERSONAL CONTACT (WAS MISSING!)
+                 ============================================================ -->
+            <h3 class="section-label">个人联系方式</h3>
+            <div class="grid two">
+              <label class="full"><span>家庭地址 1</span><input name="personal_contact.home_address_line1" placeholder="Room 501, Building 3, 88 Huaihai Rd" /></label>
+              <label><span>家庭地址 2</span><input name="personal_contact.home_address_line2" placeholder="可选填" /></label>
+              <label><span>城市</span><input name="personal_contact.home_city" placeholder="Shanghai" /></label>
+              <label><span>省/州</span><input name="personal_contact.home_state" placeholder="Shanghai" /></label>
+              <label><span>邮编</span><input name="personal_contact.home_postal_code" placeholder="200000" /></label>
+              <label><span>国家</span><input name="personal_contact.home_country" placeholder="CHINA" value="CHINA" /></label>
+              <label><span>主要电话</span><input name="personal_contact.primary_phone" placeholder="+86 138 0000 1234" /></label>
+              <label><span>次要电话</span><input name="personal_contact.secondary_phone" placeholder="可选填" /></label>
+              <label><span>工作电话</span><input name="personal_contact.work_phone" placeholder="可选填" /></label>
+              <label><span>电子邮箱</span><input type="email" name="personal_contact.email" placeholder="zhangwei@example.com" /></label>
+              <label><span>社交媒体平台</span><input name="personal_contact.social_media_platform" placeholder="如 WeChat / Facebook" /></label>
+              <label><span>社交媒体账号</span><input name="personal_contact.social_media_handle" placeholder="@zhangwei" /></label>
+              <label class="toggle"><span>邮寄地址同家庭地址</span><input type="checkbox" name="personal_contact.mailing_same_as_home" checked /></label>
+              <label class="full"><span>Contact Source IDs</span><input name="personal_contact.source_ids" placeholder="可选填" /></label>
+            </div>
+
+            <!-- ============================================================
+                 SECTION 7: PREVIOUS US TRAVEL (WAS MISSING!)
+                 ============================================================ -->
+            <h3 class="section-label">过往赴美记录</h3>
+            <div class="grid two">
+              <label class="toggle"><span>曾去过美国</span><input type="checkbox" name="previous_travel.has_previous_us_travel" /></label>
+              <label><span>上次抵达日期</span><input type="date" name="previous_travel.last_arrival_date" /></label>
+              <label><span>上次停留时长</span><input name="previous_travel.last_length_of_stay_value" placeholder="14" /></label>
+              <label><span>时长单位</span><select name="previous_travel.last_length_of_stay_unit"><option value="">请选择</option><option value="DAYS">天</option><option value="WEEKS">周</option><option value="MONTHS">月</option></select></label>
+              <label class="toggle"><span>曾有美国签证</span><input type="checkbox" name="previous_travel.has_previous_us_visa" /></label>
+              <label><span>上次签证号码</span><input name="previous_travel.previous_visa_number" placeholder="红色的签证 foil number" /></label>
+              <label><span>上次签证签发日</span><input type="date" name="previous_travel.previous_visa_issue_date" /></label>
+              <label class="toggle"><span>曾被拒签</span><input type="checkbox" name="previous_travel.visa_ever_refused" /></label>
+              <label class="toggle"><span>签证曾丢失/被盗</span><input type="checkbox" name="previous_travel.visa_ever_lost" /></label>
+              <label class="toggle"><span>签证曾被撤销</span><input type="checkbox" name="previous_travel.visa_ever_cancelled" /></label>
+              <label class="toggle"><span>曾有移民申请</span><input type="checkbox" name="previous_travel.has_immigrant_petition" /></label>
+              <label class="toggle"><span>有美国驾照</span><input type="checkbox" name="previous_travel.has_us_driver_license" /></label>
+              <label class="toggle"><span>已采集十指指纹</span><input type="checkbox" name="previous_travel.ten_print_collected" /></label>
+              <label class="full"><span>Travel Source IDs</span><input name="previous_travel.source_ids" placeholder="old_visa_scan" /></label>
+            </div>
+
+            <!-- ============================================================
+                 SECTION 8: SECURITY (ALIGNED 1:1 WITH DS-160 FILL ENGINE)
+                 Keys must match _fill_security_questions() in live_form_fill.py
+                 ============================================================ -->
+            <h3 class="section-label">安全背景 Part 1: 医疗/健康</h3>
+            <div class="security-grid">
+              <label class="toggle"><span>有传染性疾病（如结核病等）</span><input type="checkbox" name="security_background.yes_no_answers.communicable_disease" /></label>
+              <label class="toggle"><span>有身体或精神疾病影响行为能力</span><input type="checkbox" name="security_background.yes_no_answers.physical_or_mental_disorder" /></label>
+              <label class="toggle"><span>有药物滥用或成瘾问题</span><input type="checkbox" name="security_background.yes_no_answers.drug_abuser" /></label>
+            </div>
+
+            <h3 class="section-label">安全背景 Part 2: 刑事/非法活动</h3>
+            <div class="security-grid">
+              <label class="toggle"><span>曾被捕或被定罪</span><input type="checkbox" name="security_background.yes_no_answers.arrested_or_convicted" /></label>
+              <label class="toggle"><span>涉及管制物质（毒品等）违法行为</span><input type="checkbox" name="security_background.yes_no_answers.controlled_substances" /></label>
+              <label class="toggle"><span>涉及卖淫或嫖娼</span><input type="checkbox" name="security_background.yes_no_answers.prostitution_or_vice" /></label>
+              <label class="toggle"><span>涉及洗钱</span><input type="checkbox" name="security_background.yes_no_answers.money_laundering" /></label>
+              <label class="toggle"><span>涉及人口贩卖</span><input type="checkbox" name="security_background.yes_no_answers.human_trafficking" /></label>
+              <label class="toggle"><span>协助或参与严重形式的人口贩卖</span><input type="checkbox" name="security_background.yes_no_answers.assisted_severe_trafficking" /></label>
+              <label class="toggle"><span>涉及人口贩卖相关人员/收益</span><input type="checkbox" name="security_background.yes_no_answers.human_trafficking_related" /></label>
+            </div>
+
+            <h3 class="section-label">安全背景 Part 3: 恐怖/暴力/人权</h3>
+            <div class="security-grid">
+              <label class="toggle"><span>曾参与非法活动/组织</span><input type="checkbox" name="security_background.yes_no_answers.illegal_activity" /></label>
+              <label class="toggle"><span>曾参与恐怖活动</span><input type="checkbox" name="security_background.yes_no_answers.terrorist_activity" /></label>
+              <label class="toggle"><span>曾支持/资助恐怖活动</span><input type="checkbox" name="security_background.yes_no_answers.terrorist_support" /></label>
+              <label class="toggle"><span>曾是恐怖组织成员或代表</span><input type="checkbox" name="security_background.yes_no_answers.terrorist_org" /></label>
+              <label class="toggle"><span>曾有亲属参与恐怖活动</span><input type="checkbox" name="security_background.yes_no_answers.terrorist_rel" /></label>
+              <label class="toggle"><span>参与过种族灭绝</span><input type="checkbox" name="security_background.yes_no_answers.genocide" /></label>
+              <label class="toggle"><span>参与过酷刑</span><input type="checkbox" name="security_background.yes_no_answers.torture" /></label>
+              <label class="toggle"><span>参与过法外处决/政治暴力</span><input type="checkbox" name="security_background.yes_no_answers.extrajudicial_violence" /></label>
+              <label class="toggle"><span>曾作为儿童兵参与武装冲突</span><input type="checkbox" name="security_background.yes_no_answers.child_soldier" /></label>
+              <label class="toggle"><span>曾违反宗教自由</span><input type="checkbox" name="security_background.yes_no_answers.religious_freedom" /></label>
+              <label class="toggle"><span>曾参与强制人口控制政策</span><input type="checkbox" name="security_background.yes_no_answers.population_controls" /></label>
+              <label class="toggle"><span>涉及非法器官/人体组织移植</span><input type="checkbox" name="security_background.yes_no_answers.transplant" /></label>
+            </div>
+
+            <h3 class="section-label">安全背景 Part 4: 移民违规</h3>
+            <div class="security-grid">
+              <label class="toggle"><span>曾在美国被要求离开/驱逐听证</span><input type="checkbox" name="security_background.yes_no_answers.removal_hearing" /></label>
+              <label class="toggle"><span>曾以欺诈或虚假陈述获取签证/入境</span><input type="checkbox" name="security_background.yes_no_answers.immigration_fraud" /></label>
+              <label class="toggle"><span>曾未按时出席移民听证</span><input type="checkbox" name="security_background.yes_no_answers.fail_to_attend" /></label>
+              <label class="toggle"><span>曾违反签证条款停留/工作</span><input type="checkbox" name="security_background.yes_no_answers.visa_violation" /></label>
+              <label class="toggle"><span>曾被美国驱逐/递解出境</span><input type="checkbox" name="security_background.yes_no_answers.deport" /></label>
+            </div>
+
+            <h3 class="section-label">安全背景 Part 5: 其他</h3>
+            <div class="security-grid">
+              <label class="toggle"><span>曾非法转移/扣留美国公民子女监护权</span><input type="checkbox" name="security_background.yes_no_answers.child_custody" /></label>
+              <label class="toggle"><span>曾以美国公民身份投票违反规定</span><input type="checkbox" name="security_background.yes_no_answers.voting_violation" /></label>
+              <label class="toggle"><span>曾为避税放弃美国国籍</span><input type="checkbox" name="security_background.yes_no_answers.renounce_exp" /></label>
+              <label class="toggle"><span>曾在美国公立学校就读未偿还费用</span><input type="checkbox" name="security_background.yes_no_answers.attend_public_school_without_reimbursing" /></label>
+            </div>
+
+            <div class="grid two">
+              <label class="full"><span>Security Explanations JSON（如有 yes 需要说明）</span><textarea name="security_background.explanations" rows="4" placeholder='{"arrested_or_convicted":"Briefly explain the circumstances"}'></textarea></label>
+              <label class="full"><span>Security Source IDs</span><input name="security_background.source_ids" required placeholder="security_review_form" /></label>
+            </div>
+
+            <!-- ============================================================
+                 SECTION 9: EVIDENCE & PHOTO
+                 ============================================================ -->
+            <h3 class="section-label">证据目录和照片</h3>
+            <div class="grid two">
+              <label class="full"><span>Evidence Catalog JSON</span><textarea name="evidence_catalog" rows="4" placeholder='[{"id":"passport_scan","kind":"passport","description":"PRC passport bio page scan."}]'></textarea></label>
+            </div>
+            <div class="photo-upload-section">
+              <label class="full">
+                <span>签证照片上传</span>
+                <input id="photo-upload" type="file" accept="image/jpeg,image/png" />
+                <small class="photo-hint">需要2x2英寸(600x600像素以上)，白色背景，JPEG格式</small>
+                <img id="photo-preview" style="display:none;max-width:200px;margin-top:8px;border-radius:4px" alt="照片预览" />
+              </label>
+            </div>
+
+            <div class="form-actions compact">
+              <button id="manual-submit" type="submit" class="primary">用手填内容生成 dossier</button>
+            </div>
+          </form>
+
+          <div class="form-actions">
+            <div class="action-row">
+              <button id="download-json" type="button" class="ghost">下载资料文件</button>
+              <button id="copy-json" type="button" class="ghost">复制资料内容</button>
+            </div>
+            <div class="encrypt-row">
+              <label><span>加密密码（至少8位）</span><input id="encrypt-passphrase" type="password" placeholder="设置加密密码" autocomplete="new-password" /></label>
+              <button id="download-encrypted" type="button" class="ghost">下载加密文件</button>
+            </div>
+            <p id="submit-status" class="submit-status">填写完整后提交即可生成资料。</p>
+          </div>
+        </section>
+
+        <!-- Preview pane unchanged -->
+        <aside class="preview-pane">
+          <div class="preview-head">
+            <p class="eyebrow">Result</p>
+            <h2>整理结果</h2>
+            <p>这里显示缺失项、提醒，以及最终生成的申请资料内容。</p>
+          </div>
+          <section class="preview-card"><header><h3>缺失字段</h3></header><div id="missing-fields" class="item-list empty">完成整理后显示。</div></section>
+          <section class="preview-card"><header><h3>提醒</h3></header><div id="warnings" class="item-list empty">完成整理后显示。</div></section>
+          <section class="preview-card"><header><h3>申请资料预览</h3></header><pre id="json-preview" class="code-block">生成成功后，这里会出现可导入执行页的资料内容。</pre></section>
+        </aside>
+      </section>
+    </main>
+    <script src="/app/intake.js"></script>
+  </body>
+</html>

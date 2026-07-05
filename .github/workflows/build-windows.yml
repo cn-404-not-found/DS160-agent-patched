@@ -1,0 +1,63 @@
+name: Build Windows Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag name to upload to (e.g. v0.1.2-patched). Leave empty to just upload as an artifact.'
+        required: false
+        type: string
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-windows:
+    runs-on: windows-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          
+      - name: Create Virtual Environment and Install Dependencies
+        run: |
+          python -m venv .venv
+          .venv\Scripts\python.exe -m pip install --upgrade pip
+          .venv\Scripts\python.exe -m pip install -r requirements.txt
+          .venv\Scripts\python.exe -m pip install pyinstaller
+
+      - name: Build Windows Executable
+        run: |
+          .\build_win.ps1
+
+      - name: Zip Executable
+        run: |
+          Compress-Archive -Path dist\ds160-assistant-windows.exe -DestinationPath dist\ds160-assistant-windows.zip
+          
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ds160-assistant-windows
+          path: dist\ds160-assistant-windows.zip
+
+      - name: Upload to Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          $TAG = "${{ github.event.inputs.tag_name }}"
+          if ([string]::IsNullOrEmpty($TAG)) {
+            $TAG = "${{ github.ref_name }}"
+          }
+          if ($TAG -notmatch '^v') {
+             Write-Host "Not a release tag, skipping release upload."
+             exit 0
+          }
+          Write-Host "Uploading to release: $TAG"
+          gh release upload $TAG dist\ds160-assistant-windows.zip --clobber

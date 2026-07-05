@@ -1,3 +1,39 @@
 $ErrorActionPreference = "Stop"
-cd "d:\temp\DS160-agent-0.1.1\DS160-agent-0.1.1"
-.venv\Scripts\python.exe -m PyInstaller --name ds160-assistant --onefile --clean --noconfirm --paths src --add-data "d:\temp\DS160-agent-0.1.1\DS160-agent-0.1.1\app;app" --add-data "d:\temp\DS160-agent-0.1.1\DS160-agent-0.1.1\src\visa_agent\dossier.schema.json;visa_agent" --add-data "d:\temp\DS160-agent-0.1.1\DS160-agent-0.1.1\sample_data;sample_data" --hidden-import visa_agent.server --hidden-import visa_agent.schema --hidden-import visa_agent.mapping --hidden-import visa_agent.planner --hidden-import visa_agent.encryption --hidden-import visa_agent.checkpoint --hidden-import visa_agent.audit_log --hidden-import visa_agent.dom_drift --hidden-import visa_agent.dossier_contract --hidden-import visa_agent.draft_bundle --hidden-import visa_agent.page_ids --hidden-import visa_agent._paths --hidden-import visa_agent.browser.cdp_client --hidden-import visa_agent.browser.live_form_fill --hidden-import visa_agent.browser.visible_control --hidden-import visa_agent.browser.plan --hidden-import visa_agent.browser.runtime --hidden-import visa_agent.browser.locators --hidden-import visa_agent.browser.live_ceac --hidden-import visa_agent.browser.ceac_start_flow --hidden-import visa_agent.browser.driver_adapter --hidden-import visa_agent.browser.playwright_adapter --hidden-import visa_agent.browser.visible_browser --hidden-import uvicorn --hidden-import uvicorn.loops.auto --hidden-import uvicorn.protocols.http.auto --hidden-import fastapi --hidden-import pydantic --hidden-import cryptography --hidden-import websocket --distpath dist --workpath build --specpath build src\visa_agent\__main__.py
+
+Write-Host "Building Windows Executable using PyInstaller..."
+
+.venv\Scripts\python.exe -m PyInstaller --name ds160-assistant-windows --onefile --clean --noconfirm --paths src `
+  --add-data "app;app" `
+  --add-data "src\visa_agent\dossier.schema.json;visa_agent" `
+  --add-data "sample_data;sample_data" `
+  --hidden-import visa_agent.server `
+  --hidden-import visa_agent.schema `
+  --hidden-import visa_agent.mapping `
+  --hidden-import visa_agent.planner `
+  --hidden-import visa_agent.encryption `
+  --hidden-import visa_agent.checkpoint `
+  --hidden-import visa_agent.audit_log `
+  --hidden-import visa_agent.dom_drift `
+  --hidden-import visa_agent.dossier_contract `
+  --hidden-import visa_agent.draft_bundle `
+  --hidden-import visa_agent.page_ids `
+  --hidden-import visa_agent._paths `
+  --hidden-import visa_agent.browser.cdp_client `
+  --hidden-import visa_agent.browser.live_form_fill `
+  --hidden-import visa_agent.browser.visible_control `
+  --hidden-import visa_agent.browser.plan `
+  --hidden-import visa_agent.browser.runtime `
+  --hidden-import visa_agent.browser.locators `
+  --hidden-import visa_agent.browser.live_ceac `
+  --hidden-import visa_agent.browser.ceac_start_flow `
+  --hidden-import visa_agent.browser.driver_adapter `
+  --hidden-import visa_agent.browser.playwright_adapter `
+  --hidden-import visa_agent.browser.visible_browser `
+  --hidden-import uvicorn `
+  --hidden-import uvicorn.loops.auto `
+  --hidden-import uvicorn.protocols.http.auto `
+  --hidden-import fastapi `
+  --hidden-import pydantic `
+  --hidden-import cryptography `
+  --hidden-import websocket `
+  --distpath dist --workpath build --specpath build src\visa_agent\__main__.py

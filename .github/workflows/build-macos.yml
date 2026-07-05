@@ -1,0 +1,61 @@
+name: Build macOS Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: 'Tag name to upload to (e.g. v0.1.2-patched). Leave empty to just upload as an artifact.'
+        required: false
+        type: string
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  build-macos:
+    runs-on: macos-13 # macos-13 runs on Intel (x86_64) architecture, ensuring compatibility
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Install uv (Fast Python Package Manager)
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh
+
+      - name: Build macOS Executable
+        run: |
+          export PATH="$HOME/.local/bin:$PATH"
+          uv python install 3.11
+          uv venv --python 3.11 .venv
+          source .venv/bin/activate
+          uv pip install -r requirements.txt
+          uv pip install pyinstaller
+          bash scripts/build.sh onefile
+
+      - name: Zip Executable
+        run: |
+          cd dist
+          zip -r ds160-assistant-macos.zip ds160-assistant
+          
+      - name: Upload Build Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ds160-assistant-macos
+          path: dist/ds160-assistant-macos.zip
+
+      - name: Upload to Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="${{ github.event.inputs.tag_name }}"
+          if [ -z "$TAG" ]; then
+            TAG="${{ github.ref_name }}"
+          fi
+          if [[ "$TAG" != v* ]]; then
+             echo "Not a release tag, skipping release upload."
+             exit 0
+          fi
+          echo "Uploading to release: $TAG"
+          gh release upload "$TAG" dist/ds160-assistant-macos.zip --clobber

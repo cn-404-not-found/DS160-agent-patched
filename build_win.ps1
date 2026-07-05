@@ -2,10 +2,10 @@ $ErrorActionPreference = "Stop"
 
 Write-Host "Building Windows Executable using PyInstaller..."
 
-.venv\Scripts\python.exe -m PyInstaller --name ds160-assistant-windows --onefile --clean --noconfirm --paths src `
-  --add-data "app;app" `
-  --add-data "src\visa_agent\dossier.schema.json;visa_agent" `
-  --add-data "sample_data;sample_data" `
+.venv\Scripts\python.exe -m PyInstaller --name ds160-assistant-windows --onefile --clean --noconfirm --paths "$PWD\src" `
+  --add-data "$PWD\app;app" `
+  --add-data "$PWD\src\visa_agent\dossier.schema.json;visa_agent" `
+  --add-data "$PWD\sample_data;sample_data" `
   --hidden-import visa_agent.server `
   --hidden-import visa_agent.schema `
   --hidden-import visa_agent.mapping `

@@ -19,7 +19,7 @@ jobs:
     
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Install uv (Fast Python Package Manager)
         run: curl -LsSf https://astral.sh/uv/install.sh | sh
@@ -40,7 +40,7 @@ jobs:
           zip -r ds160-assistant-macos.zip ds160-assistant
           
       - name: Upload Build Artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: ds160-assistant-macos
           path: dist/ds160-assistant-macos.zip

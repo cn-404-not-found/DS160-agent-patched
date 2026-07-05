@@ -8,7 +8,6 @@ from visa_agent.browser.live_ceac import (
     LOCATION_SELECT_ID,
     START_LINK_ID,
     generate_ceac_start_commands,
-    render_live_shell_script,
 )
 
 

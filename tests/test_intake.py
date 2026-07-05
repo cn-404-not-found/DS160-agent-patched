@@ -5,11 +5,12 @@ from pathlib import Path
 import re
 import unittest
 
-from visa_agent.dossier_contract import load_dossier_schema, missing_required_dossier_fields, validate_dossier_payload
+from visa_agent.dossier_contract import missing_required_dossier_fields, validate_dossier_payload
 
 try:
     import visa_agent.server as server_module
     from visa_agent.server import (
+        DossierPreviewRequest,
         DraftBundleResponse,
         FillPageRequest,
         post_dossier_document,
@@ -19,6 +20,7 @@ try:
     SERVER_IMPORT_ERROR = None
 except ModuleNotFoundError as exc:  # pragma: no cover - environment-dependent
     server_module = None
+    DossierPreviewRequest = None
     DraftBundleResponse = None
     FillPageRequest = None
     post_dossier_document = None
@@ -85,13 +87,13 @@ class DossierPreviewEndpointTests(unittest.TestCase):
         server_module.ACTIVE_DOSSIER_DOCUMENT = None
 
     def test_preview_endpoint_returns_status_summary(self) -> None:
-        payload = post_dossier_preview(sample_dossier()).model_dump()
+        payload = post_dossier_preview(DossierPreviewRequest(**sample_dossier())).model_dump()
         self.assertTrue(payload["ok"])
         self.assertGreater(payload["status_counts"]["ready"], 0)
         self.assertEqual(payload["dossier"]["travel_plan"]["visa_class"], "B1/B2")
 
     def test_dossier_document_becomes_single_source_for_draft_bundle(self) -> None:
-        post_dossier_document(sample_dossier())
+        post_dossier_document(DossierPreviewRequest(**sample_dossier()))
         response: DraftBundleResponse = get_draft_bundle()
         bundle = response.model_dump()["bundle"]
         self.assertEqual(bundle["case_id"], "CN-B1B2-001")

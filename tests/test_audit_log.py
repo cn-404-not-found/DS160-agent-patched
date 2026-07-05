@@ -6,8 +6,6 @@ from pathlib import Path
 from unittest.mock import patch
 
 from visa_agent.audit_log import (
-    _audit_dir,
-    _today_log,
     log_dossier_import,
     log_drift_warning,
     log_page_fill,

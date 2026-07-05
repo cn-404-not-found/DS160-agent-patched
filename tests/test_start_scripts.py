@@ -52,6 +52,7 @@ class StartScriptsTests(unittest.TestCase):
             cwd=ROOT,
             capture_output=True,
             text=True,
+            errors="replace",
         )
         self.assertIn("visa_agent.server", result.stdout)
         self.assertIn("--remote-debugging-port=9222", result.stdout)

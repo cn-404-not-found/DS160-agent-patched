@@ -3,7 +3,6 @@ from __future__ import annotations
 
 import json
 import os
-import re
 import sys
 from pathlib import Path
 from typing import Any
@@ -22,7 +21,7 @@ from visa_agent._paths import app_dir as _app_dir, project_root as _project_root
 PROJECT_ROOT = _project_root()
 APP_DIR = _app_dir()
 
-from visa_agent.browser.cdp_client import find_target_websocket_url, list_debug_targets
+from visa_agent.browser.cdp_client import list_debug_targets
 from visa_agent.browser.live_form_fill import (
     _PAGE_FILL_HANDLERS,
     detect_current_page,

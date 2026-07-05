@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import sys
 from pathlib import Path
 
 from visa_agent.browser.driver_adapter import (
@@ -43,7 +44,6 @@ from visa_agent.browser.plan import (
 from visa_agent.browser.runtime import build_runtime_plan, render_runtime_plan_json
 from visa_agent.draft_bundle import build_draft_bundle, export_draft_bundle_file
 from visa_agent.encryption import (
-    is_encrypted_dossier,
     load_encrypted_dossier,
     save_encrypted_dossier,
 )

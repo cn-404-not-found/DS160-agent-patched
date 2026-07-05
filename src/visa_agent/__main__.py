@@ -112,7 +112,7 @@ def main() -> int:
 
     profile_dir = project_root().parent / ".chrome-profile"
 
-    print(f"[ds160] DS-160 Visa Assistant starting...")
+    print("[ds160] DS-160 Visa Assistant starting...")
     print(f"[ds160] Web UI: http://{api_host}:{api_port}")
 
     chrome_proc = _launch_chrome(cdp_port, profile_dir, ceac_url)

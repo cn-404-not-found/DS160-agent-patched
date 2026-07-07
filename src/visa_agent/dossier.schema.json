@@ -14,7 +14,10 @@
     "evidence_catalog"
   ],
   "properties": {
-    "case_id": { "type": "string", "minLength": 1 },
+    "case_id": {
+      "type": "string",
+      "minLength": 1
+    },
     "identity": {
       "type": "object",
       "additionalProperties": false,
@@ -30,28 +33,82 @@
         "passport_number",
         "passport_issuance_country",
         "passport_issue_date",
-        "passport_expiration_date",
-        "source_ids"
+        "passport_expiration_date"
       ],
       "properties": {
-        "surname": { "type": "string", "minLength": 1 },
-        "given_names": { "type": "string", "minLength": 1 },
-        "native_full_name": { "type": ["string", "null"] },
-        "sex": { "type": "string", "enum": ["MALE", "FEMALE"] },
-        "marital_status": { "type": "string", "enum": ["SINGLE", "MARRIED", "DIVORCED", "WIDOWED"] },
-        "date_of_birth": { "type": "string", "format": "date" },
-        "birth_city": { "type": "string", "minLength": 1 },
-        "birth_province": { "type": ["string", "null"] },
-        "birth_country": { "type": "string", "minLength": 1 },
-        "nationality": { "type": "string", "minLength": 1 },
-        "passport_number": { "type": "string", "minLength": 1 },
-        "passport_issuance_country": { "type": "string", "minLength": 1 },
-        "passport_issue_date": { "type": "string", "format": "date" },
-        "passport_expiration_date": { "type": "string", "format": "date" },
-        "passport_book_number": { "type": ["string", "null"] },
-        "source_ids": {
-          "type": "array",
-          "items": { "type": "string", "minLength": 1 }
+        "surname": {
+          "type": "string",
+          "minLength": 1
+        },
+        "given_names": {
+          "type": "string",
+          "minLength": 1
+        },
+        "native_full_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "sex": {
+          "type": "string",
+          "enum": [
+            "MALE",
+            "FEMALE"
+          ]
+        },
+        "marital_status": {
+          "type": "string",
+          "enum": [
+            "SINGLE",
+            "MARRIED",
+            "DIVORCED",
+            "WIDOWED"
+          ]
+        },
+        "date_of_birth": {
+          "type": "string",
+          "format": "date"
+        },
+        "birth_city": {
+          "type": "string",
+          "minLength": 1
+        },
+        "birth_province": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "birth_country": {
+          "type": "string",
+          "minLength": 1
+        },
+        "nationality": {
+          "type": "string",
+          "minLength": 1
+        },
+        "passport_number": {
+          "type": "string",
+          "minLength": 1
+        },
+        "passport_issuance_country": {
+          "type": "string",
+          "minLength": 1
+        },
+        "passport_issue_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "passport_expiration_date": {
+          "type": "string",
+          "format": "date"
+        },
+        "passport_book_number": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
@@ -59,83 +116,208 @@
       "type": "object",
       "additionalProperties": false,
       "required": [
-        "visa_class",
-        "source_ids"
+        "visa_class"
       ],
       "properties": {
-        "visa_class": { "type": "string", "minLength": 1 },
-        "purpose_notes": { "type": ["string", "null"] },
-        "intended_arrival_date": { "type": ["string", "null"], "format": "date" },
-        "intended_length_of_stay_value": { "type": ["string", "null"] },
-        "intended_length_of_stay_unit": { "type": ["string", "null"], "enum": ["DAYS", "WEEKS", "MONTHS"] },
-        "payer_name": { "type": ["string", "null"] },
-        "us_contact_name": { "type": ["string", "null"] },
-        "us_contact_organization": { "type": ["string", "null"] },
-        "us_contact_address_line1": { "type": ["string", "null"] },
-        "us_contact_city": { "type": ["string", "null"] },
-        "us_contact_state": { "type": ["string", "null"] },
-        "us_contact_postal_code": { "type": ["string", "null"] },
-        "us_contact_phone": { "type": ["string", "null"] },
-        "us_contact_email": { "type": ["string", "null"], "format": "email" },
-        "source_ids": {
-          "type": "array",
-          "items": { "type": "string", "minLength": 1 }
+        "visa_class": {
+          "type": "string",
+          "minLength": 1
+        },
+        "purpose_notes": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intended_arrival_date": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "date"
+        },
+        "intended_length_of_stay_value": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "intended_length_of_stay_unit": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "DAYS",
+            "WEEKS",
+            "MONTHS"
+          ]
+        },
+        "payer_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "us_contact_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "us_contact_organization": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "us_contact_address_line1": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "us_contact_city": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "us_contact_state": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "us_contact_postal_code": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "us_contact_phone": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "us_contact_email": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "format": "email"
         }
       }
     },
     "employment_education": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["source_ids"],
+      "required": [],
       "properties": {
-        "primary_occupation": { "type": ["string", "null"], "enum": ["BUSINESSPERSON", "STUDENT", "OTHER"] },
-        "current_employer_name": { "type": ["string", "null"] },
-        "current_employer_address": { "type": ["string", "null"] },
-        "monthly_income_local": { "type": ["string", "null"] },
-        "school_name": { "type": ["string", "null"] },
-        "source_ids": {
-          "type": "array",
-          "items": { "type": "string", "minLength": 1 }
+        "primary_occupation": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "enum": [
+            "BUSINESSPERSON",
+            "STUDENT",
+            "OTHER"
+          ]
+        },
+        "current_employer_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "current_employer_address": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "monthly_income_local": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "school_name": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
     "family_contacts": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["source_ids"],
+      "required": [],
       "properties": {
-        "father_full_name": { "type": ["string", "null"] },
-        "mother_full_name": { "type": ["string", "null"] },
-        "spouse_full_name": { "type": ["string", "null"] },
-        "us_relative_name": { "type": ["string", "null"] },
-        "us_relative_status": { "type": ["string", "null"] },
-        "source_ids": {
-          "type": "array",
-          "items": { "type": "string", "minLength": 1 }
+        "father_full_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "mother_full_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "spouse_full_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "us_relative_name": {
+          "type": [
+            "string",
+            "null"
+          ]
+        },
+        "us_relative_status": {
+          "type": [
+            "string",
+            "null"
+          ]
         }
       }
     },
     "security_background": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["yes_no_answers", "explanations", "source_ids"],
+      "required": [
+        "yes_no_answers",
+        "explanations"
+      ],
       "properties": {
         "yes_no_answers": {
           "type": "object",
           "additionalProperties": true,
-          "required": ["communicable_disease", "arrested_or_convicted"],
+          "required": [
+            "communicable_disease",
+            "arrested_or_convicted"
+          ],
           "properties": {
-            "communicable_disease": { "type": "boolean" },
-            "arrested_or_convicted": { "type": "boolean" }
+            "communicable_disease": {
+              "type": "boolean"
+            },
+            "arrested_or_convicted": {
+              "type": "boolean"
+            }
           }
         },
         "explanations": {
           "type": "object",
-          "additionalProperties": { "type": "string" }
-        },
-        "source_ids": {
-          "type": "array",
-          "items": { "type": "string", "minLength": 1 }
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -144,11 +326,24 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["id", "kind", "description"],
+        "required": [
+          "id",
+          "kind",
+          "description"
+        ],
         "properties": {
-          "id": { "type": "string", "minLength": 1 },
-          "kind": { "type": "string", "minLength": 1 },
-          "description": { "type": "string", "minLength": 1 }
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "kind": {
+            "type": "string",
+            "minLength": 1
+          },
+          "description": {
+            "type": "string",
+            "minLength": 1
+          }
         }
       }
     }

@@ -11,7 +11,6 @@ from visa_agent.schema import ApplicantDossier, load_dossier
 
 TOP_STEPS = [
     {"id": "complete", "label": "COMPLETE"},
-    {"id": "photo", "label": "PHOTO"},
     {"id": "review", "label": "REVIEW"},
     {"id": "sign", "label": "SIGN"},
 ]

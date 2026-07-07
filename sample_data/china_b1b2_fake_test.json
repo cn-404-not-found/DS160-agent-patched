@@ -3,7 +3,7 @@
   "identity": {
     "surname": "LI",
     "given_names": "MING",
-    "native_full_name": "李明",
+    "native_full_name": "\u674e\u660e",
     "sex": "MALE",
     "marital_status": "SINGLE",
     "date_of_birth": "1992-03-14",
@@ -16,9 +16,6 @@
     "passport_issue_date": "2024-01-08",
     "passport_expiration_date": "2034-01-07",
     "passport_book_number": null,
-    "source_ids": [
-      "passport_scan_test"
-    ],
     "other_nationality": false,
     "permanent_resident_other_country": false,
     "national_id_number": null,
@@ -39,31 +36,21 @@
     "us_contact_state": "Washington",
     "us_contact_postal_code": "98101",
     "us_contact_phone": "+1 206 555 0198",
-    "us_contact_email": "olivia.chen@exampleforum.test",
-    "source_ids": [
-      "itinerary_email_test",
-      "event_invitation_test"
-    ]
+    "us_contact_email": "olivia.chen@exampleforum.test"
   },
   "employment_education": {
     "primary_occupation": "BUSINESSPERSON",
     "current_employer_name": "Beijing Demo Technology Co., Ltd.",
     "current_employer_address": "88 Demo Plaza, Chaoyang District, Beijing, China",
     "monthly_income_local": "28000",
-    "school_name": null,
-    "source_ids": [
-      "employment_letter_test"
-    ]
+    "school_name": null
   },
   "family_contacts": {
     "father_full_name": "LI GUOQIANG",
     "mother_full_name": "ZHANG YAN",
     "spouse_full_name": null,
     "us_relative_name": null,
-    "us_relative_status": null,
-    "source_ids": [
-      "family_intake_form_test"
-    ]
+    "us_relative_status": null
   },
   "security_background": {
     "yes_no_answers": {
@@ -99,10 +86,7 @@
       "renounce_exp": false,
       "attend_public_school_without_reimbursing": false
     },
-    "explanations": {},
-    "source_ids": [
-      "security_review_form_test"
-    ]
+    "explanations": {}
   },
   "evidence_catalog": [
     {
@@ -149,8 +133,7 @@
     "email": "zhangwei@example.com",
     "social_media_platform": "WeChat",
     "social_media_handle": "@zhangwei",
-    "mailing_same_as_home": true,
-    "source_ids": []
+    "mailing_same_as_home": true
   },
   "previous_travel": {
     "has_previous_us_travel": false,
@@ -165,7 +148,6 @@
     "visa_ever_cancelled": false,
     "has_immigrant_petition": false,
     "has_us_driver_license": false,
-    "ten_print_collected": false,
-    "source_ids": []
+    "ten_print_collected": false
   }
 }

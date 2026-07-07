@@ -11,7 +11,6 @@ class PlannedAction:
     action_type: str
     field_id: str
     proposed_value: str | bool | None
-    evidence_refs: list[str]
     notes: str | None
 
     def to_dict(self) -> dict[str, object]:
@@ -41,7 +40,6 @@ def _to_action(action_type: str, field: MappedField) -> PlannedAction:
         action_type=action_type,
         field_id=field.field_id,
         proposed_value=field.proposed_value,
-        evidence_refs=field.evidence_refs,
         notes=field.notes,
     )
 
@@ -60,7 +58,6 @@ def build_execution_plan(mapped_fields: list[MappedField]) -> ExecutionPlan:
     hard_stops = [
         "stop_on_captcha",
         "stop_on_applicant_signature",
-        "stop_on_photo_failure",
     ]
     if review_actions:
         hard_stops.append("stop_for_operator_review_queue")

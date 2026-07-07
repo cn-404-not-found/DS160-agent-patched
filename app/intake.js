@@ -5,7 +5,6 @@ const FALLBACK_SCHEMA_DOCUMENT = {
   $schema: "https://json-schema.org/draft/2020-12/schema",
   $id: "https://local.ds160/dossier.schema.json",
   title: "China B1/B2 Applicant Dossier",
-  required: ["case_id", "identity", "travel_plan", "employment_education", "family_contacts", "security_background", "evidence_catalog"],
 };
 
 const REQUIRED_PATHS = [
@@ -22,15 +21,9 @@ const REQUIRED_PATHS = [
   "identity.passport_issuance_country",
   "identity.passport_issue_date",
   "identity.passport_expiration_date",
-  "identity.source_ids",
   "travel_plan.visa_class",
-  "travel_plan.source_ids",
-  "employment_education.source_ids",
-  "family_contacts.source_ids",
   "security_background.yes_no_answers.communicable_disease",
   "security_background.yes_no_answers.arrested_or_convicted",
-  "security_background.source_ids",
-  "evidence_catalog",
 ];
 
 const DATE_PATHS = [
@@ -60,15 +53,7 @@ const ENUMS = {
   "previous_travel.last_length_of_stay_unit": ["DAYS", "WEEKS", "MONTHS"],
   "employment_education.primary_occupation": ["BUSINESSPERSON", "STUDENT", "OTHER"],
 };
-const JSON_TEXTAREA_PATHS = ["security_background.explanations", "evidence_catalog"];
 const ARRAY_INPUT_PATHS = [
-  "identity.source_ids",
-  "travel_plan.source_ids",
-  "employment_education.source_ids",
-  "family_contacts.source_ids",
-  "personal_contact.source_ids",
-  "previous_travel.source_ids",
-  "security_background.source_ids",
 ];
 const BOOLEAN_PATHS = [
   "identity.other_nationality",
@@ -129,14 +114,11 @@ const copyButton = document.getElementById("copy-json");
 const missingFields = document.getElementById("missing-fields");
 const warnings = document.getElementById("warnings");
 
-const photoUpload = document.getElementById("photo-upload");
-const photoPreview = document.getElementById("photo-preview");
 
 const state = {
   latestJsonText: "",
   schema: null,
   offlineMode: false,
-  photoDataUrl: null,
 };
 
 
@@ -383,16 +365,6 @@ function validateDossierPayload(payload) {
       invalids[path] = "请按当前选项填写。";
     }
   }
-  if (!Array.isArray(payload.evidence_catalog)) {
-    invalids["evidence_catalog"] = "必须是 JSON 数组。";
-  }
-  if (payload.evidence_catalog && Array.isArray(payload.evidence_catalog)) {
-    payload.evidence_catalog.forEach((item, index) => {
-      if (!item || typeof item !== "object" || !item.id || !item.kind || !item.description) {
-        invalids[`evidence_catalog`] = `第 ${index + 1} 条证据缺少 id/kind/description。`;
-      }
-    });
-  }
   if (!payload.security_background?.explanations || typeof payload.security_background.explanations !== "object" || Array.isArray(payload.security_background.explanations)) {
     invalids["security_background.explanations"] = "必须是 JSON 对象。";
   }
@@ -460,7 +432,6 @@ function manualPayload() {
       national_id_number: f("identity.national_id_number"),
       us_social_security_number: f("identity.us_social_security_number"),
       us_taxpayer_id_number: f("identity.us_taxpayer_id_number"),
-      source_ids: s("identity.source_ids"),
     },
     travel_plan: {
       visa_class: f("travel_plan.visa_class"),
@@ -477,7 +448,6 @@ function manualPayload() {
       us_contact_postal_code: f("travel_plan.us_contact_postal_code"),
       us_contact_phone: f("travel_plan.us_contact_phone"),
       us_contact_email: f("travel_plan.us_contact_email"),
-      source_ids: s("travel_plan.source_ids"),
     },
     employment_education: {
       primary_occupation: f("employment_education.primary_occupation"),
@@ -529,7 +499,6 @@ function manualPayload() {
       military_service_end_date: f("employment_education.military_service_end_date"),
       insurgent_organization_explanation: f("employment_education.insurgent_organization_explanation"),
       monthly_income_local: f("employment_education.monthly_income_local"),
-      source_ids: s("employment_education.source_ids"),
     },
     family_contacts: {
       father_full_name: f("family_contacts.father_full_name"),
@@ -547,7 +516,6 @@ function manualPayload() {
       has_us_other_relatives: checkbox("family_contacts.has_us_other_relatives"),
       us_relative_name: f("family_contacts.us_relative_name"),
       us_relative_status: f("family_contacts.us_relative_status"),
-      source_ids: s("family_contacts.source_ids"),
     },
     personal_contact: {
       home_address_line1: f("personal_contact.home_address_line1"),
@@ -563,7 +531,6 @@ function manualPayload() {
       social_media_platform: f("personal_contact.social_media_platform"),
       social_media_handle: f("personal_contact.social_media_handle"),
       mailing_same_as_home: checkbox("personal_contact.mailing_same_as_home"),
-      source_ids: s("personal_contact.source_ids"),
     },
     previous_travel: {
       has_previous_us_travel: checkbox("previous_travel.has_previous_us_travel"),
@@ -579,7 +546,6 @@ function manualPayload() {
       has_immigrant_petition: checkbox("previous_travel.has_immigrant_petition"),
       has_us_driver_license: checkbox("previous_travel.has_us_driver_license"),
       ten_print_collected: checkbox("previous_travel.ten_print_collected"),
-      source_ids: s("previous_travel.source_ids"),
     },
     security_background: {
       yes_no_answers: {
@@ -621,9 +587,7 @@ function manualPayload() {
         attend_public_school_without_reimbursing: checkbox("security_background.yes_no_answers.attend_public_school_without_reimbursing"),
       },
       explanations: parseJsonText(manualForm.elements.namedItem("security_background.explanations")?.value || "", {}),
-      source_ids: s("security_background.source_ids"),
     },
-    evidence_catalog: parseJsonText(manualForm.elements.namedItem("evidence_catalog")?.value || "", []),
   };
   return payload;
 }
@@ -806,57 +770,7 @@ async function copyJson() {
 }
 
 
-if (photoUpload) {
-  photoUpload.addEventListener("change", function () {
-    const file = photoUpload.files?.[0];
-    if (!file) {
-      state.photoDataUrl = null;
-      photoPreview.style.display = "none";
-      return;
-    }
-    if (!file.type.startsWith("image/")) {
-      submitStatus.textContent = "照片必须是 JPEG 或 PNG 格式。";
-      photoUpload.value = "";
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      const img = new Image();
-      img.onload = function () {
-        if (img.width < 600 || img.height < 600) {
-          submitStatus.textContent = `照片尺寸 ${img.width}x${img.height}，需要至少 600x600 像素（2x2英寸）。`;
-          state.photoDataUrl = null;
-          photoPreview.style.display = "none";
-          return;
-        }
-        state.photoDataUrl = e.target.result;
-        photoPreview.src = e.target.result;
-        photoPreview.style.display = "";
-        submitStatus.textContent = `照片已就绪：${img.width}x${img.height} 像素`;
-      };
-      img.src = e.target.result;
-    };
-    reader.readAsDataURL(file);
-  });
-}
 
-
-function enrichPayloadWithPhoto(payload) {
-  if (state.photoDataUrl) {
-    if (!Array.isArray(payload.evidence_catalog)) {
-      payload.evidence_catalog = [];
-    }
-    const existing = payload.evidence_catalog.find((e) => e.kind === "photo");
-    if (!existing) {
-      payload.evidence_catalog.push({
-        id: "visa_photo",
-        kind: "photo",
-        description: "Visa application photo (digital)",
-      });
-    }
-  }
-  return payload;
-}
 
 
 manualForm.addEventListener("submit", async (event) => {
@@ -877,7 +791,6 @@ manualForm.addEventListener("submit", async (event) => {
   }
 
   clearMissingHighlights();
-  payload = enrichPayloadWithPhoto(payload);
   const exportDocument = await buildExportDocument(payload);
   state.latestJsonText = JSON.stringify(exportDocument, null, 2);
   jsonPreview.textContent = state.latestJsonText;

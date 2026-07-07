@@ -42,9 +42,6 @@ class MappingTests(unittest.TestCase):
         self.assertEqual(field.status, "blocked")
         self.assertIsNone(field.proposed_value)
 
-    def test_all_fields_have_evidence_refs(self) -> None:
-        for item in self.mapped:
-            self.assertTrue(item.evidence_refs, msg=f"{item.field_id} is missing evidence refs")
 
     def test_execution_plan_includes_review_and_block_stops(self) -> None:
         self.assertIn("stop_for_operator_review_queue", self.plan.hard_stops)

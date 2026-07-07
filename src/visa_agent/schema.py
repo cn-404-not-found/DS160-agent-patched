@@ -28,8 +28,6 @@ class ApplicantIdentity:
     national_id_number: str | None = None
     us_social_security_number: str | None = None
     us_taxpayer_id_number: str | None = None
-    source_ids: list[str] = field(default_factory=list)
-
 
 @dataclass(frozen=True)
 class TravelPlan:
@@ -47,8 +45,6 @@ class TravelPlan:
     us_contact_postal_code: str | None
     us_contact_phone: str | None
     us_contact_email: str | None
-    source_ids: list[str] = field(default_factory=list)
-
 
 @dataclass(frozen=True)
 class EmploymentEducation:
@@ -105,8 +101,6 @@ class EmploymentEducation:
     military_service_start_date: str | None = None
     military_service_end_date: str | None = None
     insurgent_organization_explanation: str | None = None
-    source_ids: list[str] = field(default_factory=list)
-
 
 @dataclass(frozen=True)
 class FamilyContacts:
@@ -125,15 +119,11 @@ class FamilyContacts:
     mother_in_us: bool = False
     has_us_immediate_relatives: bool = False
     has_us_other_relatives: bool = False
-    source_ids: list[str] = field(default_factory=list)
-
 
 @dataclass(frozen=True)
 class SecurityBackground:
     yes_no_answers: dict[str, bool]
     explanations: dict[str, str]
-    source_ids: list[str] = field(default_factory=list)
-
 
 @dataclass(frozen=True)
 class PersonalContactInfo:
@@ -150,8 +140,6 @@ class PersonalContactInfo:
     social_media_platform: str | None = None
     social_media_handle: str | None = None
     mailing_same_as_home: bool = True
-    source_ids: list[str] = field(default_factory=list)
-
 
 @dataclass(frozen=True)
 class PreviousTravelInfo:
@@ -168,8 +156,6 @@ class PreviousTravelInfo:
     has_immigrant_petition: bool = False
     has_us_driver_license: bool = False
     ten_print_collected: bool = False
-    source_ids: list[str] = field(default_factory=list)
-
 
 @dataclass(frozen=True)
 class EvidenceItem:
@@ -212,9 +198,7 @@ def _load_identity(payload: dict[str, Any]) -> ApplicantIdentity:
         permanent_resident_other_country=bool(payload.get("permanent_resident_other_country", False)),
         national_id_number=payload.get("national_id_number"),
         us_social_security_number=payload.get("us_social_security_number"),
-        us_taxpayer_id_number=payload.get("us_taxpayer_id_number"),
-        source_ids=list(payload.get("source_ids", [])),
-    )
+        us_taxpayer_id_number=payload.get("us_taxpayer_id_number"),    )
 
 
 def _load_travel_plan(payload: dict[str, Any]) -> TravelPlan:
@@ -232,9 +216,7 @@ def _load_travel_plan(payload: dict[str, Any]) -> TravelPlan:
         us_contact_state=payload.get("us_contact_state"),
         us_contact_postal_code=payload.get("us_contact_postal_code"),
         us_contact_phone=payload.get("us_contact_phone"),
-        us_contact_email=payload.get("us_contact_email"),
-        source_ids=list(payload.get("source_ids", [])),
-    )
+        us_contact_email=payload.get("us_contact_email"),    )
 
 
 def _load_employment(payload: dict[str, Any]) -> EmploymentEducation:
@@ -287,9 +269,7 @@ def _load_employment(payload: dict[str, Any]) -> EmploymentEducation:
         military_specialty=payload.get("military_specialty"),
         military_service_start_date=payload.get("military_service_start_date"),
         military_service_end_date=payload.get("military_service_end_date"),
-        insurgent_organization_explanation=payload.get("insurgent_organization_explanation"),
-        source_ids=list(payload.get("source_ids", [])),
-    )
+        insurgent_organization_explanation=payload.get("insurgent_organization_explanation"),    )
 
 
 def _load_family(payload: dict[str, Any]) -> FamilyContacts:
@@ -308,9 +288,7 @@ def _load_family(payload: dict[str, Any]) -> FamilyContacts:
         father_in_us=bool(payload.get("father_in_us", False)),
         mother_in_us=bool(payload.get("mother_in_us", False)),
         has_us_immediate_relatives=bool(payload.get("has_us_immediate_relatives", False)),
-        has_us_other_relatives=bool(payload.get("has_us_other_relatives", False)),
-        source_ids=list(payload.get("source_ids", [])),
-    )
+        has_us_other_relatives=bool(payload.get("has_us_other_relatives", False)),    )
 
 
 def _load_personal_contact(payload: dict[str, Any] | None) -> PersonalContactInfo | None:
@@ -329,9 +307,7 @@ def _load_personal_contact(payload: dict[str, Any] | None) -> PersonalContactInf
         email=payload.get("email"),
         social_media_platform=payload.get("social_media_platform"),
         social_media_handle=payload.get("social_media_handle"),
-        mailing_same_as_home=bool(payload.get("mailing_same_as_home", True)),
-        source_ids=list(payload.get("source_ids", [])),
-    )
+        mailing_same_as_home=bool(payload.get("mailing_same_as_home", True)),    )
 
 
 def _load_previous_travel(payload: dict[str, Any] | None) -> PreviousTravelInfo | None:
@@ -350,17 +326,13 @@ def _load_previous_travel(payload: dict[str, Any] | None) -> PreviousTravelInfo 
         visa_ever_cancelled=bool(payload.get("visa_ever_cancelled", False)),
         has_immigrant_petition=bool(payload.get("has_immigrant_petition", False)),
         has_us_driver_license=bool(payload.get("has_us_driver_license", False)),
-        ten_print_collected=bool(payload.get("ten_print_collected", False)),
-        source_ids=list(payload.get("source_ids", [])),
-    )
+        ten_print_collected=bool(payload.get("ten_print_collected", False)),    )
 
 
 def _load_security(payload: dict[str, Any]) -> SecurityBackground:
     return SecurityBackground(
         yes_no_answers=dict(payload.get("yes_no_answers", {})),
-        explanations=dict(payload.get("explanations", {})),
-        source_ids=list(payload.get("source_ids", [])),
-    )
+        explanations=dict(payload.get("explanations", {})),    )
 
 
 def load_dossier(path: str | Path, passphrase: str | None = None) -> ApplicantDossier:

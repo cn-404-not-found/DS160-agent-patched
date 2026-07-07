@@ -14,7 +14,6 @@ class ResolvedRuntimeInstruction:
     locator_key: str
     locator: dict[str, str] | None
     proposed_value: str | bool | None
-    evidence_refs: list[str]
     notes: str | None
 
     def to_dict(self) -> dict[str, object]:
@@ -71,7 +70,6 @@ def _resolve_instruction(page_id: str, instruction: BrowserInstruction) -> Resol
         locator_key=instruction.locator_key,
         locator=_serialize_locator(locator),
         proposed_value=instruction.proposed_value,
-        evidence_refs=instruction.evidence_refs,
         notes=instruction.notes,
     )
 

@@ -90,7 +90,6 @@ class BrowserInstruction:
     field_id: str
     locator_key: str
     proposed_value: str | bool | None
-    evidence_refs: list[str]
     notes: str | None
 
     def to_dict(self) -> dict[str, object]:
@@ -133,7 +132,6 @@ def _to_instruction(action: PlannedAction) -> BrowserInstruction:
         field_id=action.field_id,
         locator_key=_locator_key(action.field_id),
         proposed_value=action.proposed_value,
-        evidence_refs=action.evidence_refs,
         notes=action.notes,
     )
 

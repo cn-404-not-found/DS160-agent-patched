@@ -3,7 +3,7 @@
   "identity": {
     "surname": "ZHANG",
     "given_names": "WEI",
-    "native_full_name": "张伟",
+    "native_full_name": "\u5f20\u4f1f",
     "sex": "MALE",
     "marital_status": "MARRIED",
     "date_of_birth": "1990-08-15",
@@ -20,8 +20,7 @@
     "permanent_resident_other_country": false,
     "national_id_number": null,
     "us_social_security_number": null,
-    "us_taxpayer_id_number": null,
-    "source_ids": ["passport_scan"]
+    "us_taxpayer_id_number": null
   },
   "travel_plan": {
     "visa_class": "B1/B2",
@@ -37,24 +36,21 @@
     "us_contact_state": "California",
     "us_contact_postal_code": "94105",
     "us_contact_phone": null,
-    "us_contact_email": "mchen@exampleusimports.com",
-    "source_ids": ["itinerary_email", "invitation_letter"]
+    "us_contact_email": "mchen@exampleusimports.com"
   },
   "employment_education": {
     "primary_occupation": "BUSINESSPERSON",
     "current_employer_name": "Shanghai Example Trading Co., Ltd.",
     "current_employer_address": "88 Huaihai Middle Road, Shanghai, China",
     "monthly_income_local": "32000",
-    "school_name": null,
-    "source_ids": ["employment_letter"]
+    "school_name": null
   },
   "family_contacts": {
     "father_full_name": "ZHANG JIANGUO",
     "mother_full_name": "LI HUA",
     "spouse_full_name": "WANG LI",
     "us_relative_name": null,
-    "us_relative_status": null,
-    "source_ids": ["family_intake_form"]
+    "us_relative_status": null
   },
   "security_background": {
     "yes_no_answers": {
@@ -90,8 +86,7 @@
       "renounce_exp": false,
       "attend_public_school_without_reimbursing": false
     },
-    "explanations": {},
-    "source_ids": ["security_review_form"]
+    "explanations": {}
   },
   "evidence_catalog": [
     {
@@ -138,8 +133,7 @@
     "email": "zhangwei@example.com",
     "social_media_platform": "WeChat",
     "social_media_handle": "@zhangwei",
-    "mailing_same_as_home": true,
-    "source_ids": []
+    "mailing_same_as_home": true
   },
   "previous_travel": {
     "has_previous_us_travel": false,
@@ -154,7 +148,6 @@
     "visa_ever_cancelled": false,
     "has_immigrant_petition": false,
     "has_us_driver_license": false,
-    "ten_print_collected": false,
-    "source_ids": []
+    "ten_print_collected": false
   }
 }

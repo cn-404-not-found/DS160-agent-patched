@@ -71,7 +71,6 @@
               <label><span>身份证号码</span><input name="identity.national_id_number" placeholder="选填" /></label>
               <label><span>美国社保号 (SSN)</span><input name="identity.us_social_security_number" placeholder="无可留空" /></label>
               <label><span>美国纳税号 (ITIN)</span><input name="identity.us_taxpayer_id_number" placeholder="无可留空" /></label>
-              <label class="full"><span>Identity Source IDs</span><input name="identity.source_ids" required placeholder="passport_scan, passport_translation" /><small class="field-hint" data-hint-for="identity.source_ids"></small></label>
             </div>
 
             <!-- ============================================================
@@ -91,7 +90,6 @@
               <label><span>州</span><input name="travel_plan.us_contact_state" placeholder="California" /></label>
               <label><span>邮编</span><input name="travel_plan.us_contact_postal_code" placeholder="94105" /></label>
               <label><span>邮箱</span><input type="email" name="travel_plan.us_contact_email" placeholder="mchen@example.com" /></label>
-              <label class="full"><span>Travel Source IDs</span><input name="travel_plan.source_ids" required placeholder="itinerary_email, invitation_letter" /></label>
             </div>
 
             <!-- ============================================================
@@ -167,7 +165,6 @@
               <label><span>服役起始日</span><input type="date" name="employment_education.military_service_start_date" /></label>
               <label><span>服役结束日</span><input type="date" name="employment_education.military_service_end_date" /></label>
               <label class="full"><span>如曾有反叛/游击队/武装组织相关经历，请说明</span><textarea name="employment_education.insurgent_organization_explanation" rows="2" placeholder="无可留空"></textarea></label>
-              <label class="full"><span>Employment Source IDs</span><input name="employment_education.source_ids" required placeholder="employment_letter" /></label>
             </div>
 
             <!-- ============================================================
@@ -190,7 +187,6 @@
               <label class="toggle"><span>有其他亲属在美国</span><input type="checkbox" name="family_contacts.has_us_other_relatives" /></label>
               <label><span>美国亲属姓名</span><input name="family_contacts.us_relative_name" placeholder="无可留空" /></label>
               <label><span>美国亲属关系/身份</span><input name="family_contacts.us_relative_status" placeholder="例如 FRIEND / BROTHER / LPR" /></label>
-              <label class="full"><span>Family Source IDs</span><input name="family_contacts.source_ids" required placeholder="family_intake_form" /></label>
             </div>
 
             <!-- ============================================================
@@ -211,7 +207,6 @@
               <label><span>社交媒体平台</span><input name="personal_contact.social_media_platform" placeholder="如 WeChat / Facebook" /></label>
               <label><span>社交媒体账号</span><input name="personal_contact.social_media_handle" placeholder="@zhangwei" /></label>
               <label class="toggle"><span>邮寄地址同家庭地址</span><input type="checkbox" name="personal_contact.mailing_same_as_home" checked /></label>
-              <label class="full"><span>Contact Source IDs</span><input name="personal_contact.source_ids" placeholder="可选填" /></label>
             </div>
 
             <!-- ============================================================
@@ -232,7 +227,6 @@
               <label class="toggle"><span>曾有移民申请</span><input type="checkbox" name="previous_travel.has_immigrant_petition" /></label>
               <label class="toggle"><span>有美国驾照</span><input type="checkbox" name="previous_travel.has_us_driver_license" /></label>
               <label class="toggle"><span>已采集十指指纹</span><input type="checkbox" name="previous_travel.ten_print_collected" /></label>
-              <label class="full"><span>Travel Source IDs</span><input name="previous_travel.source_ids" placeholder="old_visa_scan" /></label>
             </div>
 
             <!-- ============================================================
@@ -292,23 +286,6 @@
 
             <div class="grid two">
               <label class="full"><span>Security Explanations JSON（如有 yes 需要说明）</span><textarea name="security_background.explanations" rows="4" placeholder='{"arrested_or_convicted":"Briefly explain the circumstances"}'></textarea></label>
-              <label class="full"><span>Security Source IDs</span><input name="security_background.source_ids" required placeholder="security_review_form" /></label>
-            </div>
-
-            <!-- ============================================================
-                 SECTION 9: EVIDENCE & PHOTO
-                 ============================================================ -->
-            <h3 class="section-label">证据目录和照片</h3>
-            <div class="grid two">
-              <label class="full"><span>Evidence Catalog JSON</span><textarea name="evidence_catalog" rows="4" placeholder='[{"id":"passport_scan","kind":"passport","description":"PRC passport bio page scan."}]'></textarea></label>
-            </div>
-            <div class="photo-upload-section">
-              <label class="full">
-                <span>签证照片上传</span>
-                <input id="photo-upload" type="file" accept="image/jpeg,image/png" />
-                <small class="photo-hint">需要2x2英寸(600x600像素以上)，白色背景，JPEG格式</small>
-                <img id="photo-preview" style="display:none;max-width:200px;margin-top:8px;border-radius:4px" alt="照片预览" />
-              </label>
             </div>
 
             <div class="form-actions compact">
